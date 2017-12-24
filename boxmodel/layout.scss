@@ -1,0 +1,25 @@
+@mixin widthBounds($min-width,$max-width){
+  min-width : $min-width;
+  max-width : $max-width;
+}
+
+@mixin heightBounds($min-height,$max-height){
+  min-height : $min-height;
+  max-height : $max-height;
+}
+
+@mixin setSize($width,$height){
+  width : $width;
+  height : $height;
+}
+
+@mixin setBoxModel($padding, $margin, $border){
+  padding : $padding;
+  margin : $margin;
+  border-width : $border;
+}
+
+@mixin setPosition($left,$top){
+  left : $left;
+  top : $top;
+}

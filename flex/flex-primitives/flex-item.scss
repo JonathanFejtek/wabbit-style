@@ -1,0 +1,55 @@
+/// Styles a flex item (child) with a given position justification. Equivalent
+/// to using margin : auto in various contexts.
+/// i.e positionFlexItem("top") == 'margin-bottom : auto'
+/// @param {String} $pos ["auto"] - Item justification.
+/// {"top", "left", "right", "bottom", "auto"}
+/// @group Flex Item Utilities
+@mixin positionFlexItem($pos: "auto"){
+  @if($pos == "top"){
+    margin-bottom : auto;
+  }
+
+  @else if($pos == "left"){
+    margin-right : auto;
+  }
+
+  @else if($pos == "right"){
+    margin-left : auto;
+  }
+
+  @else if($pos == "bottom"){
+    margin-top : auto;
+  }
+
+  @else if($pos == "auto"){
+    margin: auto;
+  }
+}
+
+/// Styles a flex item (child) with a given flex value. Equivalent to using
+/// 'flex: $val' for all vendors.
+/// @param {Number} $val [1] - Flex value for item.
+/// @group Flex Item Utilities
+@mixin flex($val: 1){
+  -webkit-flex : $val;
+  flex : $val;
+}
+
+
+/// Styles a flex item (child) with a given flex-grow value. Equivalent to using
+/// 'flex-grow: $val' for all vendors.
+/// @param {Number} $val [1] - Flex-grow value for item.
+/// @group Flex Item Utilities
+@mixin flexGrow($val){
+  -webkit-flex-grow: $val;
+  flex-shrink: $val;
+}
+
+/// Styles a flex item (child) with a given flex-shrink value. Equivalent to using
+/// 'flex-shrink: $val' for all vendors.
+/// @param {Number} $val [1] - Flex-shrink value for item.
+/// @group Flex Item Utilities
+@mixin flexShrink($val){
+  -webkit-flex-shrink: $val;
+  flex-shrink: $val;
+}

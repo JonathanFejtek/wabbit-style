@@ -1,0 +1,39 @@
+@import 'flex/flex-primitives/flex-container';
+@import 'flex/flex-primitives/flex-item';
+@import 'flex/flex-layout';
+@import 'boxmodel/layout';
+@import 'utilities/utils';
+@import 'utilities/setup';
+
+
+@import 'color/color';
+@include setupDocument();
+
+
+
+//tests
+.container{
+  @include displayFlex("row");
+}
+
+.item{
+  @include flex(1);
+}
+
+.page{
+  @include pageFlexContainer("column");
+}
+
+.w{
+  @include resetBoxModel();
+}
+
+.c{
+  @include setColor("background","rgb",255,50,16);
+  @include setSize(500px, 600px);
+  @include setBoxModel(
+    10px 0px 10px 0px, //padding
+    0px 10px 0px 10px,  //margin
+    1px 1px 1px 1px); //border
+  @include setPosition(10px,10px);
+}

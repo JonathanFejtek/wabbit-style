@@ -1,0 +1,56 @@
+@import 'utils';
+
+@mixin borderBox{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@mixin contentBox{
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+@mixin inheritBoxSize{
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+@mixin setupBorderBoxDocument{
+  html {
+    @include borderBox;
+  }
+
+  *, *:before, *:after {
+    @include inheritBoxSize;
+  }
+}
+
+@mixin setupDocumentBoxSize($box-size){
+  @if($box-size == "border-box"){
+    html{@include borderBox;}
+  }
+  @else if($box-size == "content-box"){
+    html{@include contentBox};
+  }
+  *, *:before, *:after {
+    @include inheritBoxSize;
+  }
+}
+
+@mixin setupDocument($box-size:"border-box",$reset-box-model:true,$reset-font:true,$reset-line-height:true){
+  @include setupDocumentBoxSize($box-size);
+  *{
+    @if($reset-box-model){
+      @include resetBoxModel();
+    }
+    @if($reset-font){
+      font-size : 100%
+    }
+    @if($reset-line-height){
+      line-height : 1
+    }
+  }
+}

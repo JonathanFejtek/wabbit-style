@@ -1,0 +1,57 @@
+@function getColor($color-space,$val1,$val2,$val3,$alpha){
+  @if($color-space == "RGB" or "rgb" or "RGBA" or "rgba"){
+    @return rgba($val1,$val2,$val3,$alpha);
+  }
+
+  @else if($color-space == "HSL" or "hsl" or "HSLA" or "hsla"){
+    @return hsla($val1,$val2*100%,$val3*100%,$alpha);
+  }
+
+  @else{
+    @return white;
+  }
+}
+
+@mixin backgroundColor($color-space,$val1,$val2,$val3,$alpha:1){
+  background-color : getColor($color-space,$val1,$val2,$val3,$alpha);
+}
+
+@mixin textColor($color-space,$val1,$val2,$val3,$alpha:1){
+  color : getColor($color-space,$val1,$val2,$val3,$alpha);
+}
+
+@mixin borderColor($color-space,$val1,$val2,$val3,$alpha:1){
+  border-color : getColor($color-space,$val1,$val2,$val3,$alpha);
+}
+
+@mixin outlineColor($color-space,$val1,$val2,$val3,$alpha:1){
+  outline-color : getColor($color-space,$val1,$val2,$val3,$alpha);
+}
+
+/// Set the color of a specified element area.
+/// @param {String} $area [] - Area of element to style
+/// {"background","text","border","outline"}
+/// @param {String} $color-space [] - Color space.
+/// {"HSL","HSLA","hsl","hsla","RGB","RGBA","rgb","rgba"}
+/// @param {String} $val1 [] - Hue (0-360) or Red (0-255), depending on color space.
+/// @param {String} $val2 [] - Saturation (0-1) or Green (0-255), depending on color space.
+/// @param {String} $val3 [] - Lightness (0-1) or Blue (0-255), depending on color space.
+/// @param {String} $alpha [1] - Alpha/Opacity
+@mixin setColor($area,$color-space,$val1,$val2,$val3,$alpha:1){
+
+  @if($area == "background"){
+    @include backgroundColor($color-space,$val1,$val2,$val3,$alpha);
+  }
+
+  @else if($area == "text"){
+    @include textColor($color-space,$val1,$val2,$val3,$alpha);
+  }
+
+  @else if($area == "border"){
+    @include borderColor($color-space,$val1,$val2,$val3,$alpha);
+  }
+
+  @else if($area == "outline"){
+    @include outlineColor($color-space,$val1,$val2,$val3,$alpha);
+  }
+}

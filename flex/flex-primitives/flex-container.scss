@@ -1,0 +1,110 @@
+/// Styles an element as a flexbox. Equivalent to calling 'display : flex' for
+/// all vendors.
+/// @group Flex Container Utilities
+@mixin flexElement{
+  display : flex;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+}
+
+@mixin border-box{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+/// Styles an element as a flexbox with a given flex flow.
+/// @param {String} $type ["column"] - Type of flex element. {"column", "row",
+/// "column-reverse", "row-reverse"}
+/// @group Flex Container Utilities
+@mixin displayFlex($type: "column"){
+  @include flexElement;
+
+  @if($type == "column"){
+    flex-flow : column;
+    -webkit-flex-flow : column;
+  }
+  @else if($type == "row"){
+    flex-flow : row;
+    -webkit-flex-flow : row;
+  }
+
+  @else if($type == "column-reverse"){
+    flex-flow : column-reverse;
+    -webkit-flex-flow : column-reverse;
+  }
+  @else if($type == "row-reverse"){
+    flex-flow : row-reverse;
+    -webkit-flex-flow : row-reverse;
+  }
+}
+
+/// Styles a flexbox with a given content justification.
+/// @param {String} $position ["center"] - Type of justification.
+/// {"start", "center", "end", "space-around", "space-between"}
+/// @group Flex Container Utilities
+@mixin flexJustifyContent($position: "center"){
+  @if($position == "start"){
+    justify-content : flex-start;
+    -webkit-justify-content : flex-start;
+  }
+  @else if($position == "center"){
+    justify-content : center;
+    -webkit-justify-content : center;
+  }
+
+  @else if($position == "end"){
+    justify-content : flex-end;
+    -webkit-justify-content : flex-end;
+  }
+
+  @else if($position == "space-around"){
+    justify-content : space-around;
+    -webkit-justify-content : space-around;
+  }
+
+  @else if($position == "space-between"){
+    justify-content : space-between;
+    -webkit-justify-content : space-between;
+  }
+}
+
+/// Styles a flexbox with a given flex-wrap.
+/// @param {String} $wrapType ["no-wrap"] - Type of flex-wrap.
+/// {"no-wrap", "wrap", "wrap-reverse", "inherit"}
+/// @group Flex Container Utilities
+@mixin flexWrap($wrapType: "no-wrap"){
+  @if($wrapType == "no-wrap"){
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+  }
+  @else if($wrapType == "wrap"){
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  @else if($wrapType == "wrap-reverse"){
+    -webkit-flex-wrap: wrap-reverse;
+    flex-wrap: wrap-reverse;
+  }
+
+  @else if($wrapType == "inherit"){
+    -webkit-flex-wrap: inherit;
+    flex-wrap: inherit;
+  }
+}
+
+
+@mixin widthBounds($min-width,$max-width){
+  min-width : $min-width;
+  max-width : $max-width;
+}
+
+@mixin heightBounds($min-height,$max-height){
+  min-height : $min-height;
+  max-height : $max-height;
+}

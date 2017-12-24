@@ -1,0 +1,35 @@
+
+@mixin resetBoxModel($padding:true,$margin:true,$border:true){
+  @if($padding){
+    padding : 0;
+  }
+
+  @if($margin){
+    margin : 0;
+  }
+
+  @if($border){
+    border : 0;
+  }
+}
+
+@mixin debugBorders($color){
+  border-style : solid;
+  border-width : 1px;
+  border-color : $color;
+}
+
+
+@mixin resetAll{
+  @include resetMarginPadding;
+  font-size : 100%;
+  line-height :1;
+}
+
+@mixin clearfix{
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

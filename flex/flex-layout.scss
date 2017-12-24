@@ -1,0 +1,62 @@
+@import 'flex-primitives/flex-container';
+@import 'flex-primitives/flex-item';
+@import '../utilities/utils';
+
+
+@mixin fullPageFlexColumn{
+  width : 100%;
+  min-height : 100vh;
+  @include resetBoxModel();
+  @include displayFlex("column");
+}
+
+@mixin fullPageFlexRow{
+  width : 100%;
+  min-height : 100vh;
+  @include resetBoxModel();
+  @include displayFlex("row");
+}
+
+@mixin pageFlexContainer($type){
+  @if($type == "column"){
+    @include fullPageFlexColumn;
+  }
+  @else if($type == "row"){
+    @include fullPageFlexRow;
+  }
+}
+
+@mixin flexHeader($height){
+  @include displayFlex("row");
+  @include debugBorders(green);
+  height : $height;
+}
+
+@mixin flexFooter($height){
+  @include displayFlex("row");
+  @include positionFlexItem("bottom");
+  height : $height;
+}
+
+
+@mixin flexNavTop($height){
+  @include displayFlex("row");
+  height : $height;
+}
+
+@mixin flexNavLeft($width){
+  @include displayFlex("column");
+  width : $width;
+}
+
+@mixin flexNavRight($width){
+  @include displayFlex("column");
+  @include positionFlexItem("right");
+  width : $width;
+}
+
+@mixin flexNavBottom($height){
+  @include displayFlex("row");
+  @include positionFlexItem("bottom");
+  height : $height;
+}
