@@ -10,13 +10,6 @@
   display: -webkit-flex;
 }
 
-@mixin border-box{
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-
 /// Styles an element as a flexbox with a given flex flow.
 /// @param {String} $type ["column"] - Type of flex element. {"column", "row",
 /// "column-reverse", "row-reverse"}
@@ -96,15 +89,4 @@
     -webkit-flex-wrap: inherit;
     flex-wrap: inherit;
   }
-}
-
-
-@mixin widthBounds($min-width,$max-width){
-  min-width : $min-width;
-  max-width : $max-width;
-}
-
-@mixin heightBounds($min-height,$max-height){
-  min-height : $min-height;
-  max-height : $max-height;
 }
