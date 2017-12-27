@@ -1,0 +1,177 @@
+@import "../flex/flex-primitives/flex-container";
+@import "../flex/flex-primitives/flex-item";
+@import "../utilities/utils";
+
+
+@mixin wGridContainer(){
+  @include displayFlex("row");
+  @include flexJustifyContent("space-between");
+}
+
+@mixin wGridItem($name){
+  .#{$name}{width : 100px};
+}
+
+@mixin createWabbitDivGrid($gridName,$width,$divisionList,$gutterWidth){
+  $ratios : str-split($divisionList," ");
+
+  .#{$gridName}{
+  //  max-width : $width;
+    width : $width;
+    @include wGridContainer();
+  }
+
+  .#{$gridName}-columnItem{
+     padding-left : $gutterWidth/2;
+     padding-right : $gutterWidth/2;
+  }
+
+  .#{$gridName}-columnItem:first-of-type{
+    padding-left : 0px;
+  }
+
+  .#{$gridName}-columnItem:last-of-type{
+    padding-right : 0px;
+  }
+
+  $i : 1;
+  $numColumns : length($ratios);
+  @each $ratio in $ratios{
+    .#{$gridName}-col#{$i}{
+      width: -webkit-calc((100% * #{$ratio}));
+      width:    -moz-calc((100% * #{$ratio}));
+      width:         calc((100% * #{$ratio}));
+     @extend .#{$gridName}-columnItem;
+    }
+    $i : $i+1;
+  }
+
+}
+
+@mixin createWabbitGrid($gridName,$width,$numColumns,$gutterWidth,$implementationType,$gutterType){
+
+  .#{$gridName}{
+  //  max-width : $width;
+    width : $width;
+    @include wGridContainer();
+  }
+
+  @if($implementationType == "float"){
+    @if($gutterType == "margin-gutter"){
+
+    }
+
+    @else if($gutterType == "padding-gutter"){
+
+    }
+  }
+
+  @else if($implementationType == "flex"){
+    @if($gutterType == "margin-gutter"){
+      @include createFlexGridMarginGutters($gridName,$width,$numColumns,$gutterWidth);
+    }
+
+    @else if($gutterType == "padding-gutter"){
+      @include createFlexGridPaddingGutters($gridName,$width,$numColumns,$gutterWidth);
+    }
+    // explicit width definition
+    @else if($gutterType == "margin-gutter-EW"){
+      @include createFlexGridMarginGutterEW($gridName,$width,$numColumns,$gutterWidth);
+    }
+    // explicit width definition
+    @else if($gutterType == "padding-gutter-EW"){
+      @include createFlexGridPaddingGutterEW($gridName,$width,$numColumns,$gutterWidth);
+    }
+  }
+}
+
+
+@mixin createFlexGridMarginGutterEW($gridName,$width,$numColumns,$gutterWidth){
+
+  .#{$gridName}-columnItem{
+     width: -webkit-calc((100% - (#{$numColumns - 1} * #{$gutterWidth/2})) / #{$numColumns});
+     width:    -moz-calc((100% - (#{$numColumns - 1} * #{$gutterWidth/2})) / #{$numColumns});
+     width:         calc((100% - (#{$numColumns - 1} * #{$gutterWidth/2})) / #{$numColumns});
+     margin-left : $gutterWidth/2;
+     margin-right : $gutterWidth/2;
+  }
+
+  .#{$gridName}-columnItem:first-of-type{
+    margin-left : 0px;
+  }
+
+  .#{$gridName}-columnItem:last-of-type{
+    margin-right : 0px;
+  }
+
+}
+
+@mixin createFlexGridPaddingGutterEW($gridName,$width,$numColumns,$gutterWidth){
+
+  .#{$gridName}-columnItem{
+     width: -webkit-calc((100% / #{$numColumns}));
+     width:    -moz-calc((100% / #{$numColumns}));
+     width:         calc((100% / #{$numColumns}));
+     padding-left : $gutterWidth/2;
+     padding-right : $gutterWidth/2;
+  }
+
+  .#{$gridName}-columnItem:first-of-type{
+    padding-left : 0px;
+  }
+
+  .#{$gridName}-columnItem:last-of-type{
+    padding-right : 0px;
+  }
+}
+
+@mixin createFlexGridMarginGutters($gridName,$width,$numColumns,$gutterWidth){
+
+  .#{$gridName}-columnItem{
+     @include flex(1);
+     margin-left : $gutterWidth/2;
+     margin-right : $gutterWidth/2;
+  }
+
+  .#{$gridName}-columnItem:first-of-type{
+    margin-left : 0px;
+  }
+
+  .#{$gridName}-columnItem:last-of-type{
+    margin-right : 0px;
+  }
+}
+
+@mixin createFlexGridPaddingGutters($gridName,$width,$numColumns,$gutterWidth){
+
+  .#{$gridName}-columnItem{
+     @include flex(1);
+     padding-left : $gutterWidth/2;
+     padding-right : $gutterWidth/2;
+  }
+
+  .#{$gridName}-columnItem:first-of-type{
+    padding-left : 0px;
+  }
+
+  .#{$gridName}-columnItem:last-of-type{
+    padding-right : 0px;
+  }
+}
+
+@mixin createFloatGridPaddingGutters(){
+
+}
+
+@mixin createFloatGridMarginGutters(){
+
+}
+
+
+// possible column implementation:
+//
+  // @for $i from 1 through $numColumns{
+  //   .#{$gridName}-col#{$i}{
+  //     @extend .#{$gridName}-columnItem;
+  //   }
+  // }
