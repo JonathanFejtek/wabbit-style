@@ -68,16 +68,23 @@
 
   @else if($implementationType == "flex"){
     @if($gutterType == "margin-gutter"){
-      @include createFlexGridMarginGutters($gridName,$width,$numColumns,$gutterWidth);
+      //incorrect implementation:
+      //@include createFlexGridMarginGutters($gridName,$width,$numColumns,$gutterWidth);
+      //
+      @include createFlexGridMarginGutterEW($gridName,$width,$numColumns,$gutterWidth);
     }
 
     @else if($gutterType == "padding-gutter"){
-      @include createFlexGridPaddingGutters($gridName,$width,$numColumns,$gutterWidth);
+      //incorrect implementation:
+      //@include createFlexGridPaddingGutters($gridName,$width,$numColumns,$gutterWidth);
+      @include createFlexGridPaddingGutterEW($gridName,$width,$numColumns,$gutterWidth);
     }
+
     // explicit width definition
     @else if($gutterType == "margin-gutter-EW"){
       @include createFlexGridMarginGutterEW($gridName,$width,$numColumns,$gutterWidth);
     }
+
     // explicit width definition
     @else if($gutterType == "padding-gutter-EW"){
       @include createFlexGridPaddingGutterEW($gridName,$width,$numColumns,$gutterWidth);
